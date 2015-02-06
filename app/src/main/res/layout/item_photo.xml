@@ -4,17 +4,22 @@
 
     <ImageView
         android:id="@+id/ivPhoto"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:minHeight="75dp"/>
+        android:minHeight="50dp"
+        android:adjustViewBounds="true"
+        />
 
-    <EditText
-        android:id="@+id/etCaption"
+    <TextView
+        android:id="@+id/tvCaption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ivPhoto"
+        android:textSize="20dp"
+        android:maxLines="3"
+        android:ellipsize="end"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"/>
 </RelativeLayout>
