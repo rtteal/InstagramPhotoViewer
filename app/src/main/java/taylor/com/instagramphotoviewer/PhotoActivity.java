@@ -25,8 +25,12 @@ import taylor.com.instagramphotoviewer.model.Photo;
 public class PhotoActivity extends ActionBarActivity {
     private static final String CLIENT_ID = "82bd7291b71f472f825a09229df548c4";
     private static final String API_ENDPOINT = "https://api.instagram.com/v1/media/popular?client_id=";
+    // 914831468823935392_421481629 is the photo id
+    private static final String API_COMMENTS_ENDPOINT =
+            "https://api.instagram.com/v1/media/914831468823935392_421481629/comments?client_id=82bd7291b71f472f825a09229df548c4";
     private List<Photo> photos = new ArrayList<>();
     private PhotosAdapter adapter;
+    private final String TAG = this.getClass().getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +53,7 @@ public class PhotoActivity extends ActionBarActivity {
                     for (int i = 0; i < photosJSON.length(); i++){
                         JSONObject photoJSON = photosJSON.getJSONObject(i);
                         Photo photo = Photo.fromJson(photoJSON);
-                        Log.d("PhotoActivity", photo.toString());
+                        Log.d(TAG, photo.toString());
                         if (null != photo) photos.add(photo);
                     }
                     adapter.notifyDataSetChanged();

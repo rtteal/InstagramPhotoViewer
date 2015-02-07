@@ -1,6 +1,9 @@
 package taylor.com.instagramphotoviewer.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,25 +11,42 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.makeramen.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import java.util.List;
 
 import taylor.com.instagramphotoviewer.R;
 import taylor.com.instagramphotoviewer.model.Photo;
+import taylor.com.instagramphotoviewer.util.DeviceDimensionsHelper;
 
 /**
  * Created by rtteal on 2/5/2015.
  */
 public class PhotosAdapter extends ArrayAdapter<Photo>{
+    public final int DEVICE_HEIGHT = DeviceDimensionsHelper.getDisplayHeight(getContext());
+    public final int DEVICE_WIDTH = DeviceDimensionsHelper.getDisplayWidth(getContext());
+    Transformation transformation = new RoundedTransformationBuilder()
+            .borderColor(Color.BLACK)
+            .borderWidthDp(1)
+            .cornerRadiusDp(30)
+            .oval(false)
+            .build();
 
-    private static class ViewHolder{
+    public static class ViewHolder{
+        ImageView ivProfilePic;
         ImageView ivPhotos;
         TextView tvCaption;
+        TextView tvPhotoHeader;
     }
 
     public PhotosAdapter(Context context, List<Photo> objects) {
         super(context, android.R.layout.simple_list_item_1, objects);
+        Log.d("TEAL", "DEVICE_HEIGHT=" + DEVICE_HEIGHT);
+        Log.d("TEAL", "DEVICE_WIDTH=" + DEVICE_WIDTH);
+        double ratio = DEVICE_HEIGHT / (double) DEVICE_WIDTH;
+        Log.d("TEAL", "ratio=" + ratio);
     }
 
     @Override
@@ -39,13 +59,28 @@ public class PhotosAdapter extends ArrayAdapter<Photo>{
             convertView = inflater.inflate(R.layout.item_photo, parent, false);
             viewHolder.ivPhotos = (ImageView) convertView.findViewById(R.id.ivPhoto);
             viewHolder.tvCaption = (TextView) convertView.findViewById(R.id.tvCaption);
+            viewHolder.ivProfilePic = (ImageView) convertView.findViewById(R.id.ivProfilePic);
+            viewHolder.tvPhotoHeader = (TextView) convertView.findViewById(R.id.tvPhotoHeader);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.tvCaption.setText(photo.caption);
+        String formattedText = photo.caption ;
+        //formattedText = formattedText.replaceAll("(^|[^0-9A-Z&/]+)(#|\\uFF03)([0-9A-Z_]*[A-Z_]+[a-z0-9_\\\\u00c0-\\\\u00d6\\\\u00d8-\\\\u00f6\\\\u00f8-\\\\u00ff]*)", "<font color=\"#125674\"><b>$1</b></font>");
+        formattedText = "<font color=\"#125674\"><b>" + photo.userName + "</b></font>  " + formattedText;
+        viewHolder.tvCaption.setText(Html.fromHtml(formattedText));
+        viewHolder.tvPhotoHeader.setText(photo.userName);
         viewHolder.ivPhotos.setImageResource(0);
+        viewHolder.ivProfilePic.setImageResource(0);
         Picasso.with(getContext()).load(photo.url).into(viewHolder.ivPhotos);
+        //Picasso.with(getContext()).load(photo.profilePicture).into(viewHolder.ivProfilePic);
+        Picasso.with(getContext()).load(photo.profilePicture).transform(transformation).resize(64,64).into(viewHolder.ivProfilePic);
+        /*
+        if (photo.width > DEVICE_WIDTH){
+            Picasso.with(getContext()).load(photo.url).resize(0, DEVICE_WIDTH).into(viewHolder.ivPhotos);
+        } else {
+            Picasso.with(getContext()).load(photo.url).fit().into(viewHolder.ivPhotos);
+        } */
         return convertView;
     }
 }
