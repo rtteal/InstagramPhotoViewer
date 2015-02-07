@@ -3,7 +3,6 @@ package taylor.com.instagramphotoviewer.adapters;
 import android.content.Context;
 import android.graphics.Color;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,14 +38,11 @@ public class PhotosAdapter extends ArrayAdapter<Photo>{
         ImageView ivPhotos;
         TextView tvCaption;
         TextView tvPhotoHeader;
+        TextView tvTime;
     }
 
     public PhotosAdapter(Context context, List<Photo> objects) {
         super(context, android.R.layout.simple_list_item_1, objects);
-        Log.d("TEAL", "DEVICE_HEIGHT=" + DEVICE_HEIGHT);
-        Log.d("TEAL", "DEVICE_WIDTH=" + DEVICE_WIDTH);
-        double ratio = DEVICE_HEIGHT / (double) DEVICE_WIDTH;
-        Log.d("TEAL", "ratio=" + ratio);
     }
 
     @Override
@@ -61,14 +57,16 @@ public class PhotosAdapter extends ArrayAdapter<Photo>{
             viewHolder.tvCaption = (TextView) convertView.findViewById(R.id.tvCaption);
             viewHolder.ivProfilePic = (ImageView) convertView.findViewById(R.id.ivProfilePic);
             viewHolder.tvPhotoHeader = (TextView) convertView.findViewById(R.id.tvPhotoHeader);
+            viewHolder.tvTime = (TextView) convertView.findViewById(R.id.tvTime);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        String formattedText = photo.caption ;
-        //formattedText = formattedText.replaceAll("(^|[^0-9A-Z&/]+)(#|\\uFF03)([0-9A-Z_]*[A-Z_]+[a-z0-9_\\\\u00c0-\\\\u00d6\\\\u00d8-\\\\u00f6\\\\u00f8-\\\\u00ff]*)", "<font color=\"#125674\"><b>$1</b></font>");
-        formattedText = "<font color=\"#125674\"><b>" + photo.userName + "</b></font>  " + formattedText;
-        viewHolder.tvCaption.setText(Html.fromHtml(formattedText));
+        String formattedCaption = photo.caption;
+        //formattedCaption = formattedCaption.replaceAll("(^|[^0-9A-Z&/]+)(#|\\uFF03)([0-9A-Z_]*[A-Z_]+[a-z0-9_\\\\u00c0-\\\\u00d6\\\\u00d8-\\\\u00f6\\\\u00f8-\\\\u00ff]*)", "<font color=\"#125674\"><b>$1</b></font>");
+        formattedCaption = "<font color=\"#125674\"><b>" + photo.userName + "</b></font>  " + formattedCaption;
+        viewHolder.tvCaption.setText(Html.fromHtml(formattedCaption));
+        viewHolder.tvTime.setText(photo.createdTime);
         viewHolder.tvPhotoHeader.setText(photo.userName);
         viewHolder.ivPhotos.setImageResource(0);
         viewHolder.ivProfilePic.setImageResource(0);

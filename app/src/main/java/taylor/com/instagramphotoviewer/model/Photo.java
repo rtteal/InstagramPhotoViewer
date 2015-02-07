@@ -1,20 +1,13 @@
 package taylor.com.instagramphotoviewer.model;
 
-import android.text.format.DateUtils;
-import android.util.Log;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.math.BigDecimal;
-
-import taylor.com.instagramphotoviewer.adapters.PhotosAdapter;
 
 /**
  * Created by rtteal on 2/4/2015.
  */
 public class Photo {
-    public final String id, created_time, caption, url, userName, profilePicture;
+    public final String id, createdTime, caption, url, userName, profilePicture;
     public final int height, width, likesCount;
     private final String TAG = this.getClass().getSimpleName();
     private static final int ONE_MINUTE = 60;
@@ -23,10 +16,10 @@ public class Photo {
     private static final int ONE_WEEK = 60 * 60 * 24 * 7;
     private static final int ONE_MONTH = 60 * 60 * 24 * 7 * 4;
 
-    private Photo(String id, String created_time, String caption, String url, String userName, String profilePicture,
+    private Photo(String id, String createdTime, String caption, String url, String userName, String profilePicture,
                   int height, int width, int likesCount){
         this.id = id;
-        this.created_time = created_time;
+        this.createdTime = createdTime;
         this.url = url;
         this.userName = userName.trim();
         this.height = height;
@@ -40,7 +33,7 @@ public class Photo {
         if (null == json) return null;
         try {
             String id = json.getString("id");
-            String created_time = getFormattedTime(json.getString("created_time"));
+            String createdTime = getFormattedTime(json.getString("created_time"));
             String caption = json.isNull("caption") ? null : json.getJSONObject("caption").getString("text");
             String url = json.getJSONObject("images").getJSONObject("standard_resolution").getString("url");
             String userName = json.getJSONObject("user").getString("username");
@@ -48,7 +41,7 @@ public class Photo {
             int height = json.getJSONObject("images").getJSONObject("standard_resolution").getInt("height");
             int width = json.getJSONObject("images").getJSONObject("standard_resolution").getInt("width");
             int likesCount = json.getJSONObject("likes").getInt("count");
-            return new Photo(id, created_time, caption, url, userName, profilePicture, height, width, likesCount);
+            return new Photo(id, createdTime, caption, url, userName, profilePicture, height, width, likesCount);
         } catch (JSONException e) {
             e.printStackTrace();
         }

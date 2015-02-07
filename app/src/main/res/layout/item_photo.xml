@@ -36,6 +36,21 @@
         />
 
     <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:textSize="14sp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="#CCF3F5F7"
+        android:textColor="#B4B5B3"
+        android:drawableLeft="@drawable/clock"
+        android:drawablePadding="1dp"
+        />
+
+    <TextView
         android:id="@+id/tvCaption"
         android:layout_below="@+id/ivPhoto"
         android:layout_width="match_parent"
