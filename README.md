@@ -1,6 +1,4 @@
 # InstagramPhotoViewer
-Instagram Photo Viewer
-
 [Week 1 Project: Instagram Photo Viewer.](http://courses.codepath.com/courses/intro_to_android/week/1#!assignment)
 
 Time spent: 17 hours spent in total
