@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/ivPhoto"
@@ -51,14 +52,42 @@
         />
 
     <TextView
-        android:id="@+id/tvCaption"
+        android:id="@+id/tvLikes"
         android:layout_below="@+id/ivPhoto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="14sp"
-        android:maxLines="3"
-        android:ellipsize="end"
-        android:padding="10dp"
+        android:textColor="#125674"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
         android:background="#CCF3F5F7"
-        android:fontFamily="sans-serif"/>
+        android:drawableLeft="@drawable/heart"
+        android:drawablePadding="2dp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/tvComments"
+        android:layout_below="@+id/tvLikes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="#B4B5B3"
+        android:paddingTop="5dp"
+        android:paddingLeft="10dp"
+        android:background="#CCF3F5F7"
+        />
+
+    <TextView
+        android:id="@+id/tvCaption"
+        android:layout_below="@+id/tvComments"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:maxLines="4"
+        android:ellipsize="end"
+        android:paddingTop="2dp"
+        android:paddingLeft="10dp"
+        android:paddingBottom="10dp"
+        android:background="#CCF3F5F7" />
 </RelativeLayout>
