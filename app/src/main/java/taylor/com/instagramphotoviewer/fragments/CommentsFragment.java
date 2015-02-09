@@ -51,7 +51,7 @@ public class CommentsFragment extends DialogFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_comments, container);
         getDialog().setTitle("Comments");
-        adapter = new CommentsAdapter(PhotoActivity.context, comments);
+        adapter = new CommentsAdapter(view.getContext(), comments);
         ListView lvComments = (ListView) view.findViewById(R.id.lvComments);
         lvComments.setAdapter(adapter);
         fetchComments(getArguments().getString("id"));

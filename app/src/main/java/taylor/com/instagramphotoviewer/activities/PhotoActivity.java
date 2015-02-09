@@ -42,17 +42,11 @@ public class PhotoActivity extends FragmentActivity {
     private final String TAG = this.getClass().getSimpleName();
     private SwipeRefreshLayout swipeContainer;
     private AsyncHttpClient client = new AsyncHttpClient();
-    public static FragmentManager fragmentManager;
-    public static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo);
-        // hack to make dialog fragment work
-        fragmentManager = getSupportFragmentManager();
-        context = getApplicationContext();
-
         adapter = new PhotosAdapter(this, photos);
         ListView lvPhotos = (ListView) findViewById(R.id.lvPhotos);
         lvPhotos.setAdapter(adapter);

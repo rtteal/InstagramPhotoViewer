@@ -1,7 +1,9 @@
 package taylor.com.instagramphotoviewer.adapters;
 
+import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.app.FragmentActivity;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -64,11 +66,12 @@ public class PhotosAdapter extends ArrayAdapter<Photo>{
             viewHolder.tvTime = (TextView) convertView.findViewById(R.id.tvTime);
             viewHolder.tvLikes = (TextView) convertView.findViewById(R.id.tvLikes);
             viewHolder.tvComments = (TextView) convertView.findViewById(R.id.tvComments);
+            final FragmentManager fm = ((FragmentActivity) convertView.getContext()).getSupportFragmentManager();
             viewHolder.tvComments.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     CommentsFragment comments = CommentsFragment.newInstance(photo.id);
-                    comments.show(PhotoActivity.fragmentManager, "fragment_comments");
+                    comments.show(fm, "fragment_comments");
                 }
             });
             convertView.setTag(viewHolder);
