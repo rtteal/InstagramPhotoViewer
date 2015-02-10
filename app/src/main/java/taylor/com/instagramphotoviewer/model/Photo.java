@@ -73,7 +73,7 @@ public class Photo {
 
     @Override
     public String toString(){
-        return String.format("{caption: %s,  url: %s,  userName: %s,  height: %s, width: %s,  likesCount: %s}",
-                caption, url, userName, height, width, likesCount);
+        return String.format("{id: %s, userName: %s, caption: %s,  url: %s, height: %s, width: %s, likesCount: %s, commentsCount: %s}",
+                id, userName, caption, url, height, width, likesCount, commentsCount);
     }
 }

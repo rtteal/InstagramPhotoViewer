@@ -28,7 +28,6 @@ import taylor.com.instagramphotoviewer.model.Comment;
  * Created by rtteal on 2/7/2015.
  */
 public class CommentsFragment extends DialogFragment {
-    // 914831468823935392_421481629 is the photo id
     private static final String API_COMMENTS_ENDPOINT_PART1 =
             "https://api.instagram.com/v1/media/";
     private static final String API_COMMENTS_ENDPOINT_PART2 =
@@ -68,7 +67,7 @@ public class CommentsFragment extends DialogFragment {
                     for (int i = 0; i < photosJSON.length(); i++) {
                         JSONObject photoJSON = photosJSON.getJSONObject(i);
                         Comment comment = Comment.fromJson(photoJSON);
-                        Log.d(TAG, comment.toString());
+                        //Log.d(TAG, comment.toString());
                         if (null != comment) comments.add(comment);
                     }
                     adapter.notifyDataSetChanged();

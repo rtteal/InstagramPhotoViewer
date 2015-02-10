@@ -75,6 +75,7 @@
         android:textColor="#B4B5B3"
         android:paddingTop="5dp"
         android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:background="#CCF3F5F7"
         />
 
